@@ -126,24 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // if QuestionTotal> 
     });
 });
-//! Botón para redirigir de pcs a fonos y al revez
-document.addEventListener('DOMContentLoaded', () => {
-    // Redirigir al hacer clic en el botón de teléfonos
-    const togglePhoneButton = document.querySelector('#toggle-phone');
-    if (togglePhoneButton) {
-        togglePhoneButton.addEventListener('click', () => {
-            window.location.href = 'https://benjanapoli.github.io/Preentrega2-Napoli/';
-        });
-    }
-
-    // Redirigir al hacer clic en el botón de laptops
-    const togglePCButton = document.querySelector('#toggle-pc');
-    if (togglePCButton) {
-        togglePCButton.addEventListener('click', () => {
-            window.location.href = 'https://benjanapoli.github.io/Preentrega2-Napoli/pages/pcs.html';
-        });
-    }
-});
 
 const showHTML = () => {
     if (allProducts.length === 0) {
