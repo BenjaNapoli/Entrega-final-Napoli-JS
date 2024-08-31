@@ -82,19 +82,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Evento click para el botón de pagar
-    document.querySelector('.btn-pay').addEventListener('click', () => {
-        Swal.fire({
-            title: "¡Gracias!",
-            text: "¡Su compra ha sido exitosa!",
-            icon: "success"
-        }).then(() => {
-            allProducts = [];
-            showHTML();
-            updatePayButtonVisibility();
-            saveCartToLocalStorage();
-        });
+    document.querySelector('.btn-pay').addEventListener('click', async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(allProducts)
+            });
+    
+            if (response.ok) {
+                Swal.fire({
+                    title: "¡Gracias!",
+                    text: "¡Su compra ha sido exitosa!",
+                    icon: "success"
+                }).then(() => {
+                    allProducts = [];
+                    showHTML();
+                    updatePayButtonVisibility();
+                    saveCartToLocalStorage();
+                });
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: "Hubo un problema con su compra",
+                    icon: "error"
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: "Error",
+                text: "Hubo un problema con su compra",
+                icon: "error"
+            });
+        }
     });
-});
+    
 
 // Función para actualizar la visibilidad del botón de pagar
 function updatePayButtonVisibility() {
@@ -155,4 +179,4 @@ const showHTML = () => {
 
     valorTotal.textContent = `$${total}`;
     countProducts.textContent = totalOfProducts;
-};
+}});
