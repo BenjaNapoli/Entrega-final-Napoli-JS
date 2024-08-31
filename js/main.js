@@ -11,6 +11,8 @@ const cartTotal = document.querySelector('.cart-total');
 const valorTotal = document.querySelector('.total-pagar');
 const countProducts = document.querySelector('#contador-productos');
 const btnPay = document.querySelector('.btn-pay');
+const btnTogglePhone = document.getElementById('toggle-phone');
+const btnTogglePC = document.getElementById('toggle-pc');
 
 let allProducts = [];
 
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Evento click para el botón de pagar
     document.querySelector('.btn-pay').addEventListener('click', async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/cart', {
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -118,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-    
+});
 
 // Función para actualizar la visibilidad del botón de pagar
 function updatePayButtonVisibility() {
@@ -179,4 +181,19 @@ const showHTML = () => {
 
     valorTotal.textContent = `$${total}`;
     countProducts.textContent = totalOfProducts;
-}});
+};
+// Función para alternar la visibilidad de los telefonos
+btnTogglePhone.addEventListener('click', () => {
+    const phoneElements = document.querySelectorAll('.no-display-phone');
+    phoneElements.forEach(element => {
+        element.classList.toggle('hidden');
+    });
+});
+
+// Función para alternar la visibilidad de las computadoras
+btnTogglePC.addEventListener('click', () => {
+    const pcElements = document.querySelectorAll('.no-display-pc');
+    pcElements.forEach(element => {
+        element.classList.toggle('hidden');
+    });
+});
